@@ -1,8 +1,10 @@
 import { useMemo } from 'react'
 import { useBookingActions } from './useBookingActions'
+import { useVenueManagementActions } from './useVenueManagementActions'
 
 export function useServiceQueue() {
   const { assignBooking, bookings, reassignBooking } = useBookingActions()
+  const { venueManagementSettings } = useVenueManagementActions()
   const activeQueue = useMemo(
     () =>
       bookings
@@ -24,5 +26,10 @@ export function useServiceQueue() {
     activeQueue,
     acceptBooking,
     reassignBooking: (bookingId: string) => reassignBooking(bookingId),
+    currentWaitressOffer: {
+      title: venueManagementSettings.waitressOfferTitle,
+      detail: venueManagementSettings.waitressOfferDetail,
+      value: venueManagementSettings.waitressOfferValue,
+    },
   }
 }

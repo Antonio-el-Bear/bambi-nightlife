@@ -244,11 +244,14 @@
 }
 
 .user-chip {
-  min-width: 170px;
+  min-width: 220px;
   padding: 10px 14px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 242, 224, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .user-chip strong,
@@ -256,10 +259,61 @@
   display: block;
 }
 
+.user-chip-copy {
+  min-width: 0;
+}
+
 .user-chip span {
   color: var(--muted);
   font-size: 0.84rem;
   text-transform: capitalize;
+}
+
+.avatar {
+  overflow: hidden;
+  border-radius: 999px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 242, 224, 0.12);
+  background: linear-gradient(135deg, rgba(212, 161, 95, 0.24), rgba(94, 192, 178, 0.2));
+  color: #2b190d;
+  font-weight: 700;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-sm {
+  width: 42px;
+  height: 42px;
+}
+
+.avatar-md {
+  width: 54px;
+  height: 54px;
+}
+
+.avatar-lg {
+  width: 72px;
+  height: 72px;
+}
+
+.profile-heading {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.profile-meta {
+  min-width: 0;
+}
+
+.profile-meta strong,
+.profile-meta span {
+  display: block;
 }
 
 .primary-button,
@@ -356,6 +410,43 @@
 
 .split-layout.wide-right {
   grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+}
+
+.management-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.management-form {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 242, 224, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.management-form label {
+  display: grid;
+  gap: 8px;
+}
+
+.management-form label span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.management-form input,
+.management-form select,
+.management-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 242, 224, 0.12);
+  background: rgba(12, 10, 8, 0.54);
+  color: var(--text);
+  font: inherit;
 }
 
 .stack-block {
@@ -974,6 +1065,13 @@
   color: var(--text);
 }
 
+.auth-option-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
 .auth-option strong,
 .auth-option span,
 .auth-option small {
@@ -1044,6 +1142,10 @@
 
   .filter-toolbar {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .management-grid {
+    grid-template-columns: 1fr;
   }
 
   .booking-table-row {

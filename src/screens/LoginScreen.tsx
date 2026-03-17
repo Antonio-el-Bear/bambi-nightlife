@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { Avatar } from '../components/Avatar'
 import { useAuth } from '../hooks/useAuth'
 
 export function LoginScreen() {
@@ -27,8 +28,13 @@ export function LoginScreen() {
                 navigate('/app')
               }}
             >
-              <strong>{option.label}</strong>
-              <span>{option.name}</span>
+              <div className="auth-option-head">
+                <Avatar name={option.name} avatarUrl={option.avatarUrl} size="md" />
+                <div className="profile-meta">
+                  <strong>{option.label}</strong>
+                  <span>{option.name}</span>
+                </div>
+              </div>
               <small>{option.email}</small>
             </button>
           ))}

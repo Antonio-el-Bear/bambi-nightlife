@@ -1,3 +1,4 @@
+import { Avatar } from '../components/Avatar'
 import { SectionHeader } from '../components/SectionHeader'
 import { hostessChecks, rewardTiers } from '../data/platformData'
 import { useHostessActions } from '../hooks/useHostessActions'
@@ -49,9 +50,12 @@ export function HostessScreen() {
         <div className="status-grid three-up">
           {hostessProfiles.map((profile) => (
             <article className="status-card" key={profile.id}>
-              <div className="status-top">
-                <strong>{profile.name}</strong>
-                <span>{profile.tier}</span>
+              <div className="status-top profile-heading">
+                <Avatar name={profile.name} avatarUrl={profile.avatarUrl} size="sm" />
+                <div className="profile-meta">
+                  <strong>{profile.name}</strong>
+                  <span>{profile.tier}</span>
+                </div>
               </div>
               <p>
                 {profile.handle} brings a group of {profile.groupSize}. Reward package: {profile.reward}.

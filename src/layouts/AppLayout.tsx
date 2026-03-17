@@ -45,6 +45,7 @@ export function AppLayout() {
           onSelect={(screen) => navigate(screenToRoute[screen])}
           currentUserName={currentUser?.name ?? 'Demo user'}
           currentUserRole={currentUser?.role ?? 'guest'}
+          currentUserAvatarUrl={currentUser?.avatarUrl}
           notifications={visibleNotifications}
           onMarkNotificationRead={(notificationId) => {
             markNotificationRead(notificationId)

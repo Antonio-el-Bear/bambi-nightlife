@@ -5,12 +5,14 @@ import type {
   HostessProfile,
   ModerationCase,
   NotificationRecord,
+  VenueManagementSettings,
 } from '../types'
 import {
   seededBookings,
   seededHostessProfiles,
   seededModerationCases,
   seededNotifications,
+  seededVenueManagementSettings,
 } from './appStateData'
 
 const SESSION_KEY = 'bambi-platform-session'
@@ -18,6 +20,7 @@ const BOOKINGS_KEY = 'bambi-platform-bookings'
 const HOSTESS_KEY = 'bambi-platform-hostess'
 const MODERATION_KEY = 'bambi-platform-moderation'
 const NOTIFICATIONS_KEY = 'bambi-platform-notifications'
+const VENUE_MANAGEMENT_KEY = 'bambi-platform-venue-management'
 
 function hasWindow() {
   return typeof window !== 'undefined'
@@ -160,4 +163,12 @@ export function loadNotifications() {
 
 export function persistNotifications(notifications: NotificationRecord[]) {
   writeStorage(NOTIFICATIONS_KEY, notifications)
+}
+
+export function loadVenueManagementSettings() {
+  return readStorage<VenueManagementSettings>(VENUE_MANAGEMENT_KEY) ?? seededVenueManagementSettings
+}
+
+export function persistVenueManagementSettings(settings: VenueManagementSettings) {
+  writeStorage(VENUE_MANAGEMENT_KEY, settings)
 }

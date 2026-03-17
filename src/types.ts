@@ -76,6 +76,7 @@ export type AuthUser = {
   name: string
   role: UserRole
   email: string
+  avatarUrl: string
 }
 
 export type BookingHistoryEntry = {
@@ -122,6 +123,7 @@ export type HostessProfile = {
   id: string
   name: string
   handle: string
+  avatarUrl: string
   tier: 'Silver' | 'Gold' | 'Platinum'
   groupSize: number
   reward: string
@@ -142,4 +144,17 @@ export type LoginOption = {
   label: string
   email: string
   name: string
+  avatarUrl: string
+}
+
+export type VenueManagementSettings = {
+  featuredEventTitle: string
+  featuredEventSummary: string
+  featuredEventDate: string
+  featuredEventStatus: 'draft' | 'scheduled' | 'live'
+  featuredEventAudience: string
+  waitressOfferTitle: string
+  waitressOfferDetail: string
+  waitressOfferValue: string
+  updatedAt: string
 }

@@ -6,6 +6,7 @@ import type {
   LoginOption,
   ModerationCase,
   NotificationRecord,
+  VenueManagementSettings,
 } from '../types'
 
 export type BookingInput = Omit<BookingRecord, 'id' | 'status' | 'paymentStatus' | 'attendanceStatus' | 'recoveryStatus' | 'history'>
@@ -17,6 +18,7 @@ export type AppStateValue = {
   hostessProfiles: HostessProfile[]
   moderationCases: ModerationCase[]
   notifications: NotificationRecord[]
+  venueManagementSettings: VenueManagementSettings
   loginAs: (email: string) => void
   logout: () => void
   createBooking: (input: BookingInput) => BookingRecord
@@ -60,6 +62,10 @@ export type AppStateValue = {
     tone?: NotificationRecord['tone'],
     link?: string,
     category?: NotificationRecord['category'],
+    actor?: string,
+  ) => void
+  updateVenueManagementSettings: (
+    updates: Partial<Omit<VenueManagementSettings, 'updatedAt'>>,
     actor?: string,
   ) => void
   markNotificationRead: (notificationId: string) => void

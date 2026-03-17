@@ -3,6 +3,7 @@ import type {
   HostessProfile,
   ModerationCase,
   NotificationRecord,
+  VenueManagementSettings,
 } from '../types'
 import type { BookingInput } from './appStateTypes'
 import { makeHistoryEntry, makeNotification } from './appStatePersistence'
@@ -439,4 +440,72 @@ export function buildOperatorNotification(
     category,
     actor,
   })
+}
+
+export function buildVenueManagementNotifications(
+  previous: VenueManagementSettings,
+  next: VenueManagementSettings,
+  actor: string,
+) {
+  const notifications: NotificationRecord[] = []
+  const promotionChanged =
+    previous.featuredEventTitle !== next.featuredEventTitle ||
+    previous.featuredEventSummary !== next.featuredEventSummary ||
+    previous.featuredEventDate !== next.featuredEventDate ||
+    previous.featuredEventStatus !== next.featuredEventStatus ||
+    previous.featuredEventAudience !== next.featuredEventAudience
+  const offerChanged =
+    previous.waitressOfferTitle !== next.waitressOfferTitle ||
+    previous.waitressOfferDetail !== next.waitressOfferDetail ||
+    previous.waitressOfferValue !== next.waitressOfferValue
+
+  if (promotionChanged) {
+    notifications.push(
+      makeNotification(
+        'Venue event campaign updated',
+        `${next.featuredEventTitle} is now ${next.featuredEventStatus} for ${next.featuredEventDate}.`,
+        ['management', 'admin'],
+        {
+          link: '/app',
+          tone: next.featuredEventStatus === 'live' ? 'positive' : 'accent',
+          category: 'system',
+          actor,
+        },
+      ),
+    )
+
+    if (next.featuredEventStatus === 'live') {
+      notifications.push(
+        makeNotification(
+          'New promoted event is now live',
+          `${next.featuredEventTitle} is being pushed across the venue: ${next.featuredEventSummary}`,
+          ['guest', 'hostess', 'waitress'],
+          {
+            link: '/app',
+            tone: 'accent',
+            category: 'system',
+            actor,
+          },
+        ),
+      )
+    }
+  }
+
+  if (offerChanged) {
+    notifications.push(
+      makeNotification(
+        'Waitress offer updated',
+        `${next.waitressOfferTitle} now offers ${next.waitressOfferValue}.`,
+        ['waitress', 'management', 'admin'],
+        {
+          link: '/app/service',
+          tone: 'positive',
+          category: 'system',
+          actor,
+        },
+      ),
+    )
+  }
+
+  return notifications
 }

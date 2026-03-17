@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { NavItem, NotificationRecord, ScreenId } from '../types'
+import { Avatar } from './Avatar'
 
 type TopbarProps = {
   activeItem: NavItem
@@ -8,6 +9,7 @@ type TopbarProps = {
   onSelect: (screen: ScreenId) => void
   currentUserName: string
   currentUserRole: string
+  currentUserAvatarUrl?: string
   notifications: NotificationRecord[]
   onMarkNotificationRead: (notificationId: string) => void
   onMarkAllNotificationsRead: () => void
@@ -21,6 +23,7 @@ export function Topbar({
   onSelect,
   currentUserName,
   currentUserRole,
+  currentUserAvatarUrl,
   notifications,
   onMarkNotificationRead,
   onMarkAllNotificationsRead,
@@ -85,8 +88,11 @@ export function Topbar({
             ) : null}
           </div>
           <div className="user-chip">
-            <strong>{currentUserName}</strong>
-            <span>{currentUserRole}</span>
+            <Avatar name={currentUserName} avatarUrl={currentUserAvatarUrl} size="sm" />
+            <div className="user-chip-copy">
+              <strong>{currentUserName}</strong>
+              <span>{currentUserRole}</span>
+            </div>
           </div>
           <button type="button" className="secondary-button" onClick={onLogout}>
             Log out

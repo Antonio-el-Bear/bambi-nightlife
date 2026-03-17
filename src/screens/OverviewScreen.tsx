@@ -1,4 +1,6 @@
 import { OverviewAuditPanel } from '../components/OverviewAuditPanel'
+import { VenueFocusPanel } from '../components/VenueFocusPanel'
+import { VenueManagementPanel } from '../components/VenueManagementPanel'
 import { OverviewNotificationsPanel } from '../components/OverviewNotificationsPanel'
 import { OverviewSnapshotPanel } from '../components/OverviewSnapshotPanel'
 import { SectionHeader } from '../components/SectionHeader'
@@ -7,7 +9,16 @@ import { deliveryPhases, overviewPillars } from '../data/platformData'
 import { useOverviewModel } from '../hooks/useOverviewModel'
 
 export function OverviewScreen() {
-  const { currentUser, visibleBookings, dynamicStats, visibleNotifications, operationsHighlights } =
+  const {
+    currentUser,
+    visibleBookings,
+    dynamicStats,
+    visibleNotifications,
+    operationsHighlights,
+    venueManagementSettings,
+    updateVenueManagementSettings,
+    canManageVenueSettings,
+  } =
     useOverviewModel()
 
   return (
@@ -30,7 +41,17 @@ export function OverviewScreen() {
         </div>
       </section>
 
+      <VenueFocusPanel settings={venueManagementSettings} />
+
       <OverviewNotificationsPanel notifications={visibleNotifications} />
+
+      {canManageVenueSettings ? (
+        <VenueManagementPanel
+          actorName={currentUser?.name ?? 'Management'}
+          settings={venueManagementSettings}
+          onUpdate={updateVenueManagementSettings}
+        />
+      ) : null}
 
       <OverviewAuditPanel events={operationsHighlights} />
 

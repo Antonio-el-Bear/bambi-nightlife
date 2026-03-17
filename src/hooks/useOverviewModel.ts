@@ -2,11 +2,13 @@ import { useMemo } from 'react'
 import { overviewStats } from '../data/platformData'
 import { useBookingActions } from './useBookingActions'
 import { useOperationsActions } from './useOperationsActions'
+import { useVenueManagementActions } from './useVenueManagementActions'
 import { buildOperationsFeed } from '../utils/operationsFeed'
 
 export function useOverviewModel() {
   const { bookings, currentUser } = useBookingActions()
   const { moderationCases, notifications } = useOperationsActions()
+  const { updateVenueManagementSettings, venueManagementSettings } = useVenueManagementActions()
 
   const visibleBookings = useMemo(() => {
     if (!currentUser) {
@@ -73,5 +75,9 @@ export function useOverviewModel() {
     dynamicStats,
     visibleNotifications,
     operationsHighlights,
+    venueManagementSettings,
+    updateVenueManagementSettings,
+    canManageVenueSettings:
+      currentUser?.role === 'management' || currentUser?.role === 'admin',
   }
 }

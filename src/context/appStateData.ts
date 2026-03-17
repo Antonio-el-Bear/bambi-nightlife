@@ -4,6 +4,7 @@ import type {
   LoginOption,
   ModerationCase,
   NotificationRecord,
+  VenueManagementSettings,
 } from '../types'
 
 export const loginOptions: LoginOption[] = [
@@ -12,30 +13,35 @@ export const loginOptions: LoginOption[] = [
     label: 'Guest / Client',
     email: 'guest@bambi.local',
     name: 'Lerato Mokoena',
+    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Lerato%20Mokoena',
   },
   {
     role: 'hostess',
     label: 'Female Guest',
     email: 'hostess@bambi.local',
     name: 'Naledi Phiri',
+    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Naledi%20Phiri',
   },
   {
     role: 'waitress',
     label: 'Waitress',
     email: 'waitress@bambi.local',
     name: 'Kayla Moyo',
+    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Kayla%20Moyo',
   },
   {
     role: 'management',
     label: 'Venue Management',
     email: 'manager@bambi.local',
     name: 'Anele Dlamini',
+    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Anele%20Dlamini',
   },
   {
     role: 'admin',
     label: 'System Admin',
     email: 'admin@bambi.local',
     name: 'Tshiamo Naidoo',
+    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Tshiamo%20Naidoo',
   },
 ]
 
@@ -103,6 +109,7 @@ export const seededHostessProfiles: HostessProfile[] = [
     id: 'HP-01',
     name: 'Naledi Phiri',
     handle: '@naledi.afterdark',
+    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Naledi%20Phiri',
     tier: 'Gold',
     groupSize: 6,
     reward: '1 bottle + 2 six-packs',
@@ -113,6 +120,7 @@ export const seededHostessProfiles: HostessProfile[] = [
     id: 'HP-02',
     name: 'Zinhle Maseko',
     handle: '@zinhle.m',
+    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Zinhle%20Maseko',
     tier: 'Silver',
     groupSize: 4,
     reward: '1 bottle + 1 six-pack',
@@ -123,6 +131,7 @@ export const seededHostessProfiles: HostessProfile[] = [
     id: 'HP-03',
     name: 'Aphiwe Ndlovu',
     handle: '@aphiwe.social',
+    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Aphiwe%20Ndlovu',
     tier: 'Platinum',
     groupSize: 9,
     reward: '2 bottles + 4 six-packs + 1 two-pack',
@@ -187,3 +196,15 @@ export const seededNotifications: NotificationRecord[] = [
     link: '/app/operations',
   },
 ]
+
+export const seededVenueManagementSettings: VenueManagementSettings = {
+  featuredEventTitle: 'Saturday Noir at Bambi',
+  featuredEventSummary: 'Push premium table traffic with a velvet-rope campaign, curated bottle theatre, and hostess-led arrivals.',
+  featuredEventDate: '2026-03-21',
+  featuredEventStatus: 'live',
+  featuredEventAudience: 'VIP regulars, high-spend lounge guests, and approved female guest profiles',
+  waitressOfferTitle: 'Top table close incentive',
+  waitressOfferDetail: 'Waitresses receive a premium shift bonus for converting pending VIP requests into confirmed pre-ordered bookings.',
+  waitressOfferValue: 'R750 bonus + bottle-service priority',
+  updatedAt: '2026-03-17 19:30',
+}

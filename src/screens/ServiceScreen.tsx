@@ -5,7 +5,7 @@ import { serviceStats } from '../data/platformData'
 import { useServiceQueue } from '../hooks/useServiceQueue'
 
 export function ServiceScreen() {
-  const { activeQueue, acceptBooking, reassignBooking } = useServiceQueue()
+  const { activeQueue, acceptBooking, reassignBooking, currentWaitressOffer } = useServiceQueue()
 
   return (
     <div className="screen-stack">
@@ -19,6 +19,14 @@ export function ServiceScreen() {
           {serviceStats.map((stat) => (
             <StatCard key={stat.label} {...stat} />
           ))}
+        </div>
+        <div className="summary-card accent">
+          <span className="eyebrow subtle">Current waitress offer</span>
+          <strong>{currentWaitressOffer.title}</strong>
+          <p>{currentWaitressOffer.detail}</p>
+          <div className="action-meta">
+            <span>{currentWaitressOffer.value}</span>
+          </div>
         </div>
       </section>
 

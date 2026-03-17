@@ -10,6 +10,7 @@ import type {
   HostessProfile,
   ModerationCase,
   NotificationRecord,
+  VenueManagementSettings,
 } from '../types'
 import { loginOptions, seededBookings } from './appStateData'
 import {
@@ -23,19 +24,23 @@ import {
   buildHostessApprovalNotification,
   buildModerationCaseNotification,
   buildOperatorNotification,
+  buildVenueManagementNotifications,
 } from './appStateEvents'
 import {
+  formatEventTime,
   loadBookings,
   loadHostessProfiles,
   loadModerationCases,
   loadNotifications,
   loadSession,
+  loadVenueManagementSettings,
   makeBookingId,
   persistBookings,
   persistHostessProfiles,
   persistModerationCases,
   persistNotifications,
   persistSession,
+  persistVenueManagementSettings,
 } from './appStatePersistence'
 import {
   markAllNotificationsRead,
@@ -53,6 +58,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const [hostessProfiles, setHostessProfiles] = useState<HostessProfile[]>(() => loadHostessProfiles())
   const [moderationCases, setModerationCases] = useState<ModerationCase[]>(() => loadModerationCases())
   const [notifications, setNotifications] = useState<NotificationRecord[]>(() => loadNotifications())
+  const [venueManagementSettings, setVenueManagementSettings] = useState<VenueManagementSettings>(() => loadVenueManagementSettings())
 
   useEffect(() => {
     persistSession(currentUser)
@@ -74,6 +80,10 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     persistNotifications(notifications)
   }, [notifications])
 
+  useEffect(() => {
+    persistVenueManagementSettings(venueManagementSettings)
+  }, [venueManagementSettings])
+
   const value = useMemo<AppStateValue>(
     () => ({
       currentUser,
@@ -82,6 +92,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       hostessProfiles,
       moderationCases,
       notifications,
+      venueManagementSettings,
       loginAs: (email: string) => {
         const selected = loginOptions.find((option) => option.email === email)
 
@@ -94,6 +105,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
           email: selected.email,
           name: selected.name,
           role: selected.role,
+          avatarUrl: selected.avatarUrl,
         })
       },
       logout: () => setCurrentUser(null),
@@ -275,6 +287,25 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
           ),
         )
       },
+      updateVenueManagementSettings: (updates, actor) => {
+        const nextSettings = {
+          ...venueManagementSettings,
+          ...updates,
+          updatedAt: formatEventTime(),
+        }
+
+        setVenueManagementSettings(nextSettings)
+
+        const nextNotifications = buildVenueManagementNotifications(
+          venueManagementSettings,
+          nextSettings,
+          actor ?? currentUser?.name ?? 'Management',
+        )
+
+        if (nextNotifications.length > 0) {
+          setNotifications((current) => prependNotifications(current, ...nextNotifications))
+        }
+      },
       markNotificationRead: (notificationId) => {
         setNotifications((current) => markNotificationReadById(current, notificationId))
       },
@@ -282,7 +313,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
         setNotifications((current) => markAllNotificationsRead(current))
       },
     }),
-    [bookings, currentUser, hostessProfiles, moderationCases, notifications],
+    [bookings, currentUser, hostessProfiles, moderationCases, notifications, venueManagementSettings],
   )
 
   return <AppStateContext.Provider value={value}>{children}</AppStateContext.Provider>
