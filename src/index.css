@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+:root {
+  --bg: #0f0d0b;
+  --panel: rgba(27, 21, 17, 0.88);
+  --text: #f7efe5;
+  --muted: #bcab9e;
+  --gold: #d4a15f;
+  --teal: #5ec0b2;
+  --rose: #d77763;
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(94, 192, 178, 0.12), transparent 34%),
+    radial-gradient(circle at 88% 10%, rgba(212, 161, 95, 0.14), transparent 26%),
+    radial-gradient(circle at bottom right, rgba(215, 119, 99, 0.12), transparent 28%),
+    linear-gradient(180deg, #100d0b 0%, #090807 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+a {
+  color: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+#root {
+  width: min(1400px, calc(100% - 28px));
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+@media (max-width: 640px) {
+  #root {
+    width: calc(100% - 16px);
+    padding-top: 14px;
+  }
+}
