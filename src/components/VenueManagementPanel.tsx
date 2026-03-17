@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ChangeEvent } from 'react'
 import type { VenueManagementSettings } from '../types'
+import { PosterArtwork } from './PosterArtwork'
 import { SectionHeader } from './SectionHeader'
 
 const eventPresets: Array<Pick<VenueManagementSettings, 'featuredEventTitle' | 'featuredEventSummary' | 'featuredEventPosterUrl' | 'featuredEventDate' | 'featuredEventStatus' | 'featuredEventAudience'>> = [
@@ -63,6 +64,7 @@ export function VenueManagementPanel({ actorName, settings, onUpdate }: VenueMan
   const [waitressOfferTitle, setWaitressOfferTitle] = useState(settings.waitressOfferTitle)
   const [waitressOfferDetail, setWaitressOfferDetail] = useState(settings.waitressOfferDetail)
   const [waitressOfferValue, setWaitressOfferValue] = useState(settings.waitressOfferValue)
+  const [posterUploadFeedback, setPosterUploadFeedback] = useState('Paste a hosted image URL or upload a poster from this device.')
 
   useEffect(() => {
     setFeaturedEventTitle(settings.featuredEventTitle)
@@ -74,7 +76,42 @@ export function VenueManagementPanel({ actorName, settings, onUpdate }: VenueMan
     setWaitressOfferTitle(settings.waitressOfferTitle)
     setWaitressOfferDetail(settings.waitressOfferDetail)
     setWaitressOfferValue(settings.waitressOfferValue)
+    setPosterUploadFeedback('Paste a hosted image URL or upload a poster from this device.')
   }, [settings])
+
+  const handlePosterUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+
+    if (!file) {
+      return
+    }
+
+    if (file.size > 1_500_000) {
+      setPosterUploadFeedback('Poster image is too large. Use a file smaller than 1.5 MB.')
+      event.target.value = ''
+      return
+    }
+
+    const reader = new FileReader()
+    setPosterUploadFeedback(`Uploading ${file.name}...`)
+
+    reader.onload = () => {
+      if (typeof reader.result === 'string' && reader.result.length > 0) {
+        setFeaturedEventPosterUrl(reader.result)
+        setPosterUploadFeedback(`${file.name} is ready. Save the event campaign to publish it.`)
+        return
+      }
+
+      setPosterUploadFeedback('Poster upload failed. Try another image or paste a hosted URL.')
+    }
+
+    reader.onerror = () => {
+      setPosterUploadFeedback('Poster upload failed. Try another image or paste a hosted URL.')
+    }
+
+    reader.readAsDataURL(file)
+    event.target.value = ''
+  }
 
   return (
     <section className="card">
@@ -92,6 +129,7 @@ export function VenueManagementPanel({ actorName, settings, onUpdate }: VenueMan
               {
                 featuredEventTitle,
                 featuredEventSummary,
+                featuredEventPosterUrl,
                 featuredEventDate,
                 featuredEventStatus,
                 featuredEventAudience,
@@ -132,8 +170,19 @@ export function VenueManagementPanel({ actorName, settings, onUpdate }: VenueMan
             <span>Poster image URL</span>
             <input value={featuredEventPosterUrl} onChange={(event) => setFeaturedEventPosterUrl(event.target.value)} />
           </label>
+          <label>
+            <span>Upload poster image</span>
+            <input accept="image/*" onChange={handlePosterUpload} type="file" />
+          </label>
+          <p className="field-hint">{posterUploadFeedback}</p>
           <div className="poster-preview-shell">
-            <img alt={featuredEventTitle} className="event-poster preview" src={featuredEventPosterUrl} />
+            <PosterArtwork
+              alt={featuredEventTitle}
+              className="event-poster preview"
+              fallbackDetail="Your campaign artwork will appear here after you paste a valid image URL or upload a poster file."
+              fallbackTitle={featuredEventTitle || 'Featured event'}
+              src={featuredEventPosterUrl}
+            />
           </div>
           <div className="form-grid">
             <label>
@@ -154,6 +203,16 @@ export function VenueManagementPanel({ actorName, settings, onUpdate }: VenueMan
             <input value={featuredEventAudience} onChange={(event) => setFeaturedEventAudience(event.target.value)} />
           </label>
           <div className="form-actions">
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={() => {
+                setFeaturedEventPosterUrl('')
+                setPosterUploadFeedback('Poster cleared. Paste a new URL or upload another image.')
+              }}
+            >
+              Clear poster
+            </button>
             <button type="submit" className="primary-button">Save event campaign</button>
           </div>
         </form>

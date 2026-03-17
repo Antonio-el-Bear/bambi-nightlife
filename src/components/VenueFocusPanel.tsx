@@ -1,4 +1,5 @@
 import type { VenueManagementSettings } from '../types'
+import { PosterArtwork } from './PosterArtwork'
 import { SectionHeader } from './SectionHeader'
 
 type VenueFocusPanelProps = {
@@ -16,7 +17,13 @@ export function VenueFocusPanel({ settings }: VenueFocusPanelProps) {
         />
         <div className="venue-focus-card accent">
           <div className="event-poster-shell">
-            <img alt={settings.featuredEventTitle} className="event-poster" src={settings.featuredEventPosterUrl} />
+            <PosterArtwork
+              alt={settings.featuredEventTitle}
+              className="event-poster"
+              fallbackDetail="Upload a poster or paste a valid image URL to keep the venue campaign visually aligned across the app."
+              fallbackTitle={settings.featuredEventTitle}
+              src={settings.featuredEventPosterUrl}
+            />
           </div>
           <div className="venue-focus-copy">
             <span className="eyebrow subtle">Featured event</span>
