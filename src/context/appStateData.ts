@@ -200,6 +200,7 @@ export const seededNotifications: NotificationRecord[] = [
 export const seededVenueManagementSettings: VenueManagementSettings = {
   featuredEventTitle: 'Saturday Noir at Bambi',
   featuredEventSummary: 'Push premium table traffic with a velvet-rope campaign, curated bottle theatre, and hostess-led arrivals.',
+  featuredEventPosterUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80',
   featuredEventDate: '2026-03-21',
   featuredEventStatus: 'live',
   featuredEventAudience: 'VIP regulars, high-spend lounge guests, and approved female guest profiles',

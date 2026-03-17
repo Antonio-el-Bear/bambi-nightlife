@@ -14,14 +14,19 @@ export function VenueFocusPanel({ settings }: VenueFocusPanelProps) {
           title="What the venue is pushing right now"
           description="Everyone sees the same featured campaign and service incentive, so staff and guests stay aligned on the current commercial focus."
         />
-        <div className="summary-card accent">
-          <span className="eyebrow subtle">Featured event</span>
-          <strong>{settings.featuredEventTitle}</strong>
-          <p>{settings.featuredEventSummary}</p>
-          <div className="action-meta">
-            <span>{settings.featuredEventStatus}</span>
-            <span>{settings.featuredEventDate}</span>
-            <span>{settings.featuredEventAudience}</span>
+        <div className="venue-focus-card accent">
+          <div className="event-poster-shell">
+            <img alt={settings.featuredEventTitle} className="event-poster" src={settings.featuredEventPosterUrl} />
+          </div>
+          <div className="venue-focus-copy">
+            <span className="eyebrow subtle">Featured event</span>
+            <strong>{settings.featuredEventTitle}</strong>
+            <p>{settings.featuredEventSummary}</p>
+            <div className="action-meta">
+              <span>{settings.featuredEventStatus}</span>
+              <span>{settings.featuredEventDate}</span>
+              <span>{settings.featuredEventAudience}</span>
+            </div>
           </div>
         </div>
       </div>

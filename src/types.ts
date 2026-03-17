@@ -150,6 +150,7 @@ export type LoginOption = {
 export type VenueManagementSettings = {
   featuredEventTitle: string
   featuredEventSummary: string
+  featuredEventPosterUrl: string
   featuredEventDate: string
   featuredEventStatus: 'draft' | 'scheduled' | 'live'
   featuredEventAudience: string

@@ -451,6 +451,7 @@ export function buildVenueManagementNotifications(
   const promotionChanged =
     previous.featuredEventTitle !== next.featuredEventTitle ||
     previous.featuredEventSummary !== next.featuredEventSummary ||
+    previous.featuredEventPosterUrl !== next.featuredEventPosterUrl ||
     previous.featuredEventDate !== next.featuredEventDate ||
     previous.featuredEventStatus !== next.featuredEventStatus ||
     previous.featuredEventAudience !== next.featuredEventAudience
