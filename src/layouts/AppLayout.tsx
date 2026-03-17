@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Sidebar } from '../components/Sidebar'
 import { Topbar } from '../components/Topbar'
 import { useAppShellModel } from '../hooks/useAppShellModel'
@@ -66,14 +66,6 @@ export function AppLayout() {
         <main className="content-area">
           <Outlet />
         </main>
-
-        <div className="footer-links">
-          {accessibleItems.map((item) => (
-            <NavLink key={item.id} to={screenToRoute[item.id]} end={item.id === 'overview'}>
-              {item.label}
-            </NavLink>
-          ))}
-        </div>
       </div>
     </div>
   )

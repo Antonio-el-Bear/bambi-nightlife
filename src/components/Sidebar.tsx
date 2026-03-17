@@ -7,13 +7,22 @@ type SidebarProps = {
 }
 
 export function Sidebar({ items, activeScreen, onSelect }: SidebarProps) {
+  const badges: Record<ScreenId, string> = {
+    overview: 'OV',
+    bookings: 'BK',
+    hostess: 'FG',
+    service: 'SV',
+    operations: 'OP',
+    analytics: 'AN',
+  }
+
   return (
     <aside className="sidebar card">
       <div className="brand-lockup">
         <div className="brand-badge">BK</div>
         <div>
           <strong>Bambi Nightlife OS</strong>
-          <p>Luxury bookings, hostess growth, service control, and management oversight.</p>
+          <p>Fast control for bookings, guests, service, and ops.</p>
         </div>
       </div>
 
@@ -28,21 +37,15 @@ export function Sidebar({ items, activeScreen, onSelect }: SidebarProps) {
               className={`nav-item ${isActive ? 'active' : ''}`}
               onClick={() => onSelect(item.id)}
             >
-              <span>{item.label}</span>
-              <small>{item.eyebrow}</small>
+              <span className="nav-badge">{badges[item.id]}</span>
+              <div className="nav-copy">
+                <span>{item.label}</span>
+                <small>{item.shortLabel}</small>
+              </div>
             </button>
           )
         })}
       </nav>
-
-      <div className="sidebar-note">
-        <span className="eyebrow subtle">Product posture</span>
-        <strong>Focused, mobile-friendly, and built from the signed scope.</strong>
-        <p>
-          This front-end is structured to split cleanly into production pages later without throwing away the
-          information architecture established here.
-        </p>
-      </div>
     </aside>
   )
 }

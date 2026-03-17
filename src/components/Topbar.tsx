@@ -38,7 +38,6 @@ export function Topbar({
         <div>
           <span className="eyebrow">{activeItem.eyebrow}</span>
           <h2>{activeItem.title}</h2>
-          <p>{activeItem.description}</p>
         </div>
         <div className="topbar-actions">
           <div className="notification-shell">
