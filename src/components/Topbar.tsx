@@ -34,7 +34,7 @@ export function Topbar({
 
   return (
     <>
-      <header className="topbar card">
+      <header className="topbar card" data-module={activeItem.id}>
         <div>
           <span className="eyebrow">{activeItem.eyebrow}</span>
           <h2>{activeItem.title}</h2>
@@ -108,6 +108,7 @@ export function Topbar({
               key={item.id}
               type="button"
               className={`mobile-nav-item ${isActive ? 'active' : ''}`}
+              data-module={item.id}
               onClick={() => onSelect(item.id)}
             >
               {item.shortLabel}

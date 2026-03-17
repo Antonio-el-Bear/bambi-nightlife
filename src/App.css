@@ -86,11 +86,23 @@
   grid-template-columns: auto 1fr;
   gap: 12px;
   align-items: center;
+  position: relative;
+  overflow: hidden;
   text-align: left;
   padding: 14px 16px;
   border-radius: 18px;
   border: 1px solid rgba(255, 242, 224, 0.08);
   background: rgba(255, 255, 255, 0.03);
+}
+
+.nav-item::after,
+.shortcut-card::after,
+.topbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.9;
 }
 
 .nav-badge,
@@ -137,6 +149,8 @@
 }
 
 .topbar {
+  position: relative;
+  overflow: hidden;
   border-radius: 28px;
   padding: 24px;
   display: flex;
@@ -469,6 +483,8 @@
   padding: 18px;
   border-radius: 24px;
   display: grid;
+  position: relative;
+  overflow: hidden;
   align-content: space-between;
   gap: 14px;
   text-decoration: none;
@@ -494,6 +510,106 @@
 
 .shortcut-card span:last-child {
   color: var(--muted);
+}
+
+.nav-item > *,
+.shortcut-card > *,
+.topbar > * {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-item[data-module='overview']::after,
+.shortcut-card[data-module='overview']::after,
+.topbar[data-module='overview']::before {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(45, 226, 230, 0.18), transparent 24%),
+    radial-gradient(circle at 82% 24%, rgba(255, 95, 162, 0.14), transparent 24%);
+}
+
+.nav-item[data-module='bookings']::after,
+.shortcut-card[data-module='bookings']::after,
+.topbar[data-module='bookings']::before {
+  background:
+    linear-gradient(135deg, rgba(255, 184, 77, 0.12), transparent 42%),
+    radial-gradient(circle at 82% 20%, rgba(255, 95, 162, 0.18), transparent 24%);
+}
+
+.nav-item[data-module='hostess']::after,
+.shortcut-card[data-module='hostess']::after,
+.topbar[data-module='hostess']::before {
+  background:
+    linear-gradient(135deg, rgba(255, 95, 162, 0.16), transparent 44%),
+    radial-gradient(circle at 78% 26%, rgba(255, 184, 77, 0.12), transparent 26%);
+}
+
+.nav-item[data-module='service']::after,
+.shortcut-card[data-module='service']::after,
+.topbar[data-module='service']::before {
+  background:
+    linear-gradient(135deg, rgba(45, 226, 230, 0.16), transparent 42%),
+    radial-gradient(circle at 86% 24%, rgba(139, 92, 246, 0.18), transparent 22%);
+}
+
+.nav-item[data-module='operations']::after,
+.shortcut-card[data-module='operations']::after,
+.topbar[data-module='operations']::before {
+  background:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.18), transparent 42%),
+    radial-gradient(circle at 80% 22%, rgba(255, 95, 162, 0.16), transparent 22%);
+}
+
+.nav-item[data-module='analytics']::after,
+.shortcut-card[data-module='analytics']::after,
+.topbar[data-module='analytics']::before {
+  background:
+    linear-gradient(135deg, rgba(45, 226, 230, 0.14), transparent 42%),
+    radial-gradient(circle at 82% 22%, rgba(255, 184, 77, 0.18), transparent 22%);
+}
+
+.nav-item[data-module='bookings'] .nav-badge,
+.shortcut-card[data-module='bookings'] .shortcut-badge {
+  background: linear-gradient(135deg, rgba(255, 184, 77, 0.92), rgba(255, 95, 162, 0.72));
+}
+
+.nav-item[data-module='hostess'] .nav-badge,
+.shortcut-card[data-module='hostess'] .shortcut-badge {
+  background: linear-gradient(135deg, rgba(255, 95, 162, 0.92), rgba(255, 184, 77, 0.72));
+}
+
+.nav-item[data-module='service'] .nav-badge,
+.shortcut-card[data-module='service'] .shortcut-badge {
+  background: linear-gradient(135deg, rgba(45, 226, 230, 0.92), rgba(139, 92, 246, 0.72));
+}
+
+.nav-item[data-module='operations'] .nav-badge,
+.shortcut-card[data-module='operations'] .shortcut-badge {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.92), rgba(255, 95, 162, 0.72));
+}
+
+.nav-item[data-module='analytics'] .nav-badge,
+.shortcut-card[data-module='analytics'] .shortcut-badge {
+  background: linear-gradient(135deg, rgba(45, 226, 230, 0.92), rgba(255, 184, 77, 0.72));
+}
+
+.mobile-nav-item[data-module='bookings'] {
+  box-shadow: inset 0 0 0 1px rgba(255, 184, 77, 0.18);
+}
+
+.mobile-nav-item[data-module='hostess'] {
+  box-shadow: inset 0 0 0 1px rgba(255, 95, 162, 0.18);
+}
+
+.mobile-nav-item[data-module='service'] {
+  box-shadow: inset 0 0 0 1px rgba(45, 226, 230, 0.18);
+}
+
+.mobile-nav-item[data-module='operations'] {
+  box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.18);
+}
+
+.mobile-nav-item[data-module='analytics'] {
+  box-shadow: inset 0 0 0 1px rgba(255, 184, 77, 0.18);
 }
 
 .profile-settings-layout {

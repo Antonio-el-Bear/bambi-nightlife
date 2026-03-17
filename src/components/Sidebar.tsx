@@ -35,6 +35,7 @@ export function Sidebar({ items, activeScreen, onSelect }: SidebarProps) {
               key={item.id}
               type="button"
               className={`nav-item ${isActive ? 'active' : ''}`}
+              data-module={item.id}
               onClick={() => onSelect(item.id)}
             >
               <span className="nav-badge">{badges[item.id]}</span>

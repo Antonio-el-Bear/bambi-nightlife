@@ -72,7 +72,7 @@ export function OverviewScreen() {
         </div>
         <div className="shortcut-grid">
           {quickAccessItems.map((item) => (
-            <Link className="shortcut-card" key={item.id} to={screenToRoute[item.id]}>
+            <Link className="shortcut-card" data-module={item.id} key={item.id} to={screenToRoute[item.id]}>
               <span className="shortcut-badge">{quickAccessBadges[item.id]}</span>
               <strong>{item.label}</strong>
               <span>{item.shortLabel}</span>
