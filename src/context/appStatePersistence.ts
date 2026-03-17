@@ -21,6 +21,9 @@ const HOSTESS_KEY = 'bambi-platform-hostess'
 const MODERATION_KEY = 'bambi-platform-moderation'
 const NOTIFICATIONS_KEY = 'bambi-platform-notifications'
 const VENUE_MANAGEMENT_KEY = 'bambi-platform-venue-management'
+const PROFILE_OVERRIDES_KEY = 'bambi-platform-profile-overrides'
+
+export type ProfileOverrideMap = Record<string, Pick<AuthUser, 'name' | 'avatarUrl'>>
 
 function hasWindow() {
   return typeof window !== 'undefined'
@@ -171,4 +174,12 @@ export function loadVenueManagementSettings() {
 
 export function persistVenueManagementSettings(settings: VenueManagementSettings) {
   writeStorage(VENUE_MANAGEMENT_KEY, settings)
+}
+
+export function loadProfileOverrides() {
+  return readStorage<ProfileOverrideMap>(PROFILE_OVERRIDES_KEY) ?? {}
+}
+
+export function persistProfileOverrides(profileOverrides: ProfileOverrideMap) {
+  writeStorage(PROFILE_OVERRIDES_KEY, profileOverrides)
 }

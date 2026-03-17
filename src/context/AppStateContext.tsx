@@ -32,6 +32,7 @@ import {
   loadHostessProfiles,
   loadModerationCases,
   loadNotifications,
+  loadProfileOverrides,
   loadSession,
   loadVenueManagementSettings,
   makeBookingId,
@@ -39,6 +40,7 @@ import {
   persistHostessProfiles,
   persistModerationCases,
   persistNotifications,
+  persistProfileOverrides,
   persistSession,
   persistVenueManagementSettings,
 } from './appStatePersistence'
@@ -59,6 +61,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const [moderationCases, setModerationCases] = useState<ModerationCase[]>(() => loadModerationCases())
   const [notifications, setNotifications] = useState<NotificationRecord[]>(() => loadNotifications())
   const [venueManagementSettings, setVenueManagementSettings] = useState<VenueManagementSettings>(() => loadVenueManagementSettings())
+  const [profileOverrides, setProfileOverrides] = useState(() => loadProfileOverrides())
 
   useEffect(() => {
     persistSession(currentUser)
@@ -84,17 +87,30 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     persistVenueManagementSettings(venueManagementSettings)
   }, [venueManagementSettings])
 
+  useEffect(() => {
+    persistProfileOverrides(profileOverrides)
+  }, [profileOverrides])
+
+  const resolvedLoginOptions = useMemo(
+    () =>
+      loginOptions.map((option) => ({
+        ...option,
+        ...(profileOverrides[option.email] ?? {}),
+      })),
+    [profileOverrides],
+  )
+
   const value = useMemo<AppStateValue>(
     () => ({
       currentUser,
-      loginOptions,
+      loginOptions: resolvedLoginOptions,
       bookings,
       hostessProfiles,
       moderationCases,
       notifications,
       venueManagementSettings,
       loginAs: (email: string) => {
-        const selected = loginOptions.find((option) => option.email === email)
+        const selected = resolvedLoginOptions.find((option) => option.email === email)
 
         if (!selected) {
           return
@@ -109,6 +125,40 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
         })
       },
       logout: () => setCurrentUser(null),
+      updateCurrentUserProfile: (updates) => {
+        if (!currentUser) {
+          return
+        }
+
+        const nextName = updates.name?.trim() || currentUser.name
+        const nextAvatarUrl = updates.avatarUrl?.trim() ?? currentUser.avatarUrl
+        const nextUser = {
+          ...currentUser,
+          name: nextName,
+          avatarUrl: nextAvatarUrl,
+        }
+        const baseProfile = loginOptions.find((option) => option.email === currentUser.email)
+
+        setCurrentUser(nextUser)
+        setProfileOverrides((current) => {
+          const nextOverrides = { ...current }
+          const shouldStoreOverride =
+            !baseProfile ||
+            baseProfile.name !== nextUser.name ||
+            baseProfile.avatarUrl !== nextUser.avatarUrl
+
+          if (shouldStoreOverride) {
+            nextOverrides[currentUser.email] = {
+              name: nextUser.name,
+              avatarUrl: nextUser.avatarUrl,
+            }
+          } else {
+            delete nextOverrides[currentUser.email]
+          }
+
+          return nextOverrides
+        })
+      },
       createBooking: (input: BookingInput) => {
         let createdBooking = seededBookings[0]
         const nextBookingId = makeBookingId(bookings.length)
@@ -313,7 +363,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
         setNotifications((current) => markAllNotificationsRead(current))
       },
     }),
-    [bookings, currentUser, hostessProfiles, moderationCases, notifications, venueManagementSettings],
+    [bookings, currentUser, hostessProfiles, moderationCases, notifications, resolvedLoginOptions, venueManagementSettings],
   )
 
   return <AppStateContext.Provider value={value}>{children}</AppStateContext.Provider>

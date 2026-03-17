@@ -21,6 +21,7 @@ export type AppStateValue = {
   venueManagementSettings: VenueManagementSettings
   loginAs: (email: string) => void
   logout: () => void
+  updateCurrentUserProfile: (updates: Partial<Pick<AuthUser, 'name' | 'avatarUrl'>>) => void
   createBooking: (input: BookingInput) => BookingRecord
   updateBookingStatus: (
     bookingId: string,

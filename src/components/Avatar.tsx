@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 type AvatarProps = {
   name: string
   avatarUrl?: string
@@ -14,9 +16,15 @@ function getInitials(name: string) {
 }
 
 export function Avatar({ name, avatarUrl, size = 'md' }: AvatarProps) {
+  const [hasImageError, setHasImageError] = useState(false)
+
+  useEffect(() => {
+    setHasImageError(false)
+  }, [avatarUrl])
+
   return (
     <div className={`avatar avatar-${size}`} aria-hidden="true">
-      {avatarUrl ? <img alt="" src={avatarUrl} /> : getInitials(name)}
+      {avatarUrl && !hasImageError ? <img alt="" onError={() => setHasImageError(true)} src={avatarUrl} /> : getInitials(name)}
     </div>
   )
 }

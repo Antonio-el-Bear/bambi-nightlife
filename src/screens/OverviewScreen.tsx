@@ -1,4 +1,5 @@
 import { OverviewAuditPanel } from '../components/OverviewAuditPanel'
+import { ProfileSettingsPanel } from '../components/ProfileSettingsPanel'
 import { VenueFocusPanel } from '../components/VenueFocusPanel'
 import { VenueManagementPanel } from '../components/VenueManagementPanel'
 import { OverviewNotificationsPanel } from '../components/OverviewNotificationsPanel'
@@ -17,6 +18,7 @@ export function OverviewScreen() {
     operationsHighlights,
     venueManagementSettings,
     updateVenueManagementSettings,
+    updateCurrentUserProfile,
     canManageVenueSettings,
   } =
     useOverviewModel()
@@ -40,6 +42,10 @@ export function OverviewScreen() {
           ))}
         </div>
       </section>
+
+      {currentUser ? (
+        <ProfileSettingsPanel currentUser={currentUser} onUpdate={updateCurrentUserProfile} />
+      ) : null}
 
       <VenueFocusPanel settings={venueManagementSettings} />
 

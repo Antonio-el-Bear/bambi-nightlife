@@ -1,12 +1,14 @@
 import { useMemo } from 'react'
 import { overviewStats } from '../data/platformData'
 import { useBookingActions } from './useBookingActions'
+import { useAuth } from './useAuth'
 import { useOperationsActions } from './useOperationsActions'
 import { useVenueManagementActions } from './useVenueManagementActions'
 import { buildOperationsFeed } from '../utils/operationsFeed'
 
 export function useOverviewModel() {
   const { bookings, currentUser } = useBookingActions()
+  const { updateCurrentUserProfile } = useAuth()
   const { moderationCases, notifications } = useOperationsActions()
   const { updateVenueManagementSettings, venueManagementSettings } = useVenueManagementActions()
 
@@ -77,6 +79,7 @@ export function useOverviewModel() {
     operationsHighlights,
     venueManagementSettings,
     updateVenueManagementSettings,
+    updateCurrentUserProfile,
     canManageVenueSettings:
       currentUser?.role === 'management' || currentUser?.role === 'admin',
   }
