@@ -12,9 +12,11 @@
 }
 
 .card {
-  background: rgba(22, 18, 14, 0.84);
-  border: 1px solid rgba(255, 242, 224, 0.08);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.26);
+  background:
+    linear-gradient(180deg, rgba(45, 18, 58, 0.82), rgba(22, 8, 34, 0.88)),
+    rgba(22, 18, 14, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 28px 80px rgba(6, 2, 15, 0.42);
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
 }
@@ -42,8 +44,8 @@
   display: grid;
   place-items: center;
   font-weight: 700;
-  color: #2a1a0f;
-  background: linear-gradient(135deg, var(--gold), #f5d7ab 52%, var(--teal));
+  color: #220b1d;
+  background: linear-gradient(135deg, var(--rose), var(--gold) 45%, var(--teal));
 }
 
 .brand-lockup strong {
@@ -98,7 +100,7 @@
   border-radius: 14px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, rgba(212, 161, 95, 0.24), rgba(94, 192, 178, 0.16));
+  background: linear-gradient(135deg, rgba(255, 95, 162, 0.26), rgba(45, 226, 230, 0.18) 52%, rgba(255, 184, 77, 0.2));
   color: var(--text);
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -122,8 +124,8 @@
 
 .nav-item.active,
 .mobile-nav-item.active {
-  background: linear-gradient(135deg, rgba(212, 161, 95, 0.22), rgba(94, 192, 178, 0.16));
-  border-color: rgba(212, 161, 95, 0.25);
+  background: linear-gradient(135deg, rgba(255, 95, 162, 0.22), rgba(45, 226, 230, 0.16));
+  border-color: rgba(255, 184, 77, 0.3);
 }
 
 .nav-item:hover,
@@ -175,8 +177,8 @@
 }
 
 .notification-trigger.has-unread {
-  border-color: rgba(212, 161, 95, 0.32);
-  background: linear-gradient(135deg, rgba(212, 161, 95, 0.18), rgba(255, 255, 255, 0.04));
+  border-color: rgba(255, 184, 77, 0.34);
+  background: linear-gradient(135deg, rgba(255, 95, 162, 0.18), rgba(45, 226, 230, 0.08));
 }
 
 .notification-panel {
@@ -226,7 +228,7 @@
 }
 
 .notification-item.unread {
-  background: linear-gradient(135deg, rgba(212, 161, 95, 0.14), rgba(94, 192, 178, 0.08));
+  background: linear-gradient(135deg, rgba(255, 95, 162, 0.14), rgba(45, 226, 230, 0.08));
 }
 
 .notification-item p,
@@ -255,8 +257,8 @@
   min-width: 220px;
   padding: 10px 14px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 242, 224, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -284,8 +286,8 @@
   display: grid;
   place-items: center;
   border: 1px solid rgba(255, 242, 224, 0.12);
-  background: linear-gradient(135deg, rgba(212, 161, 95, 0.24), rgba(94, 192, 178, 0.2));
-  color: #2b190d;
+  background: linear-gradient(135deg, rgba(255, 95, 162, 0.26), rgba(45, 226, 230, 0.2));
+  color: #22091c;
   font-weight: 700;
 }
 
@@ -331,14 +333,14 @@
 }
 
 .primary-button {
-  background: linear-gradient(135deg, var(--gold), #f5d7ab);
-  color: #2b190d;
+  background: linear-gradient(135deg, var(--rose), var(--gold) 48%, var(--teal));
+  color: #240a1d;
 }
 
 .secondary-button {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.06);
   color: var(--text);
-  border: 1px solid rgba(255, 242, 224, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .mobile-nav {
@@ -387,7 +389,8 @@
   border-radius: 24px;
   min-height: 260px;
   border: 1px solid rgba(255, 242, 224, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(255, 95, 162, 0.08);
 }
 
 .hero-poster {
@@ -418,8 +421,8 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--muted);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 242, 224, 0.08);
+  background: linear-gradient(135deg, rgba(255, 95, 162, 0.12), rgba(45, 226, 230, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.08);
   margin-bottom: 14px;
 }
 
@@ -472,14 +475,15 @@
   color: var(--text);
   border: 1px solid rgba(255, 242, 224, 0.08);
   background:
-    radial-gradient(circle at top right, rgba(212, 161, 95, 0.18), transparent 38%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    radial-gradient(circle at top right, rgba(255, 95, 162, 0.2), transparent 36%),
+    radial-gradient(circle at bottom left, rgba(45, 226, 230, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
   transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
 }
 
 .shortcut-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(212, 161, 95, 0.24);
+  border-color: rgba(255, 184, 77, 0.28);
 }
 
 .shortcut-card strong {
@@ -508,7 +512,7 @@
   padding: 22px;
   border-radius: 24px;
   border: 1px solid rgba(255, 242, 224, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .management-form label {
@@ -576,7 +580,7 @@
   padding: 10px 14px;
   border-radius: 999px;
   border: 1px solid rgba(255, 242, 224, 0.12);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.06);
   color: var(--text);
   font: inherit;
   transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
@@ -584,13 +588,13 @@
 
 .preset-button:hover {
   transform: translateY(-2px);
-  border-color: rgba(212, 161, 95, 0.28);
-  background: linear-gradient(135deg, rgba(212, 161, 95, 0.18), rgba(94, 192, 178, 0.08));
+  border-color: rgba(255, 184, 77, 0.3);
+  background: linear-gradient(135deg, rgba(255, 95, 162, 0.18), rgba(45, 226, 230, 0.08));
 }
 
 .preset-button.is-selected {
-  border-color: rgba(212, 161, 95, 0.3);
-  background: linear-gradient(135deg, rgba(212, 161, 95, 0.2), rgba(94, 192, 178, 0.12));
+  border-color: rgba(255, 184, 77, 0.32);
+  background: linear-gradient(135deg, rgba(255, 95, 162, 0.22), rgba(45, 226, 230, 0.12));
 }
 
 .platform-grid {
@@ -639,7 +643,7 @@
   padding: 22px;
   border-radius: 24px;
   border: 1px solid rgba(255, 242, 224, 0.08);
-  background: linear-gradient(180deg, rgba(212, 161, 95, 0.12), rgba(255, 255, 255, 0.03));
+  background: linear-gradient(180deg, rgba(255, 95, 162, 0.12), rgba(45, 226, 230, 0.05));
 }
 
 .venue-focus-copy {
@@ -677,8 +681,8 @@
   gap: 10px;
   padding: 24px;
   background:
-    radial-gradient(circle at top right, rgba(212, 161, 95, 0.22), transparent 42%),
-    linear-gradient(180deg, rgba(94, 192, 178, 0.12), rgba(12, 10, 8, 0.3));
+    radial-gradient(circle at top right, rgba(255, 95, 162, 0.24), transparent 42%),
+    linear-gradient(180deg, rgba(45, 226, 230, 0.12), rgba(22, 8, 34, 0.34));
 }
 
 .poster-fallback strong {
@@ -704,7 +708,7 @@
 }
 
 .summary-card.accent {
-  background: linear-gradient(180deg, rgba(212, 161, 95, 0.12), rgba(255, 255, 255, 0.03));
+  background: linear-gradient(180deg, rgba(255, 95, 162, 0.12), rgba(45, 226, 230, 0.05));
 }
 
 .booking-form {
@@ -745,8 +749,8 @@
 }
 
 .step-pill.active {
-  border-color: rgba(212, 161, 95, 0.24);
-  background: linear-gradient(180deg, rgba(212, 161, 95, 0.14), rgba(255, 255, 255, 0.03));
+  border-color: rgba(255, 184, 77, 0.26);
+  background: linear-gradient(180deg, rgba(255, 95, 162, 0.14), rgba(45, 226, 230, 0.06));
 }
 
 .booking-form label {
@@ -931,7 +935,7 @@
 }
 
 .booking-table-head {
-  background: rgba(212, 161, 95, 0.1);
+  background: rgba(255, 95, 162, 0.12);
 }
 
 .booking-table-head span {
@@ -974,7 +978,7 @@
   gap: 14px;
   padding: 18px;
   border: 1px solid rgba(255, 242, 224, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .timeline-step {
@@ -983,8 +987,8 @@
   border-radius: 14px;
   display: grid;
   place-items: center;
-  background: rgba(212, 161, 95, 0.14);
-  border: 1px solid rgba(212, 161, 95, 0.28);
+  background: rgba(255, 95, 162, 0.14);
+  border: 1px solid rgba(255, 184, 77, 0.28);
   color: var(--gold);
   font-size: 0.92rem;
 }
@@ -1019,15 +1023,15 @@
 }
 
 .tone-accent {
-  box-shadow: inset 0 0 0 1px rgba(212, 161, 95, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(255, 184, 77, 0.18);
 }
 
 .tone-positive {
-  box-shadow: inset 0 0 0 1px rgba(94, 192, 178, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(45, 226, 230, 0.18);
 }
 
 .tone-urgent {
-  box-shadow: inset 0 0 0 1px rgba(215, 119, 99, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 95, 162, 0.2);
 }
 
 .insight-card h3,
@@ -1085,8 +1089,8 @@
 }
 
 .table-card.selected {
-  background: linear-gradient(180deg, rgba(212, 161, 95, 0.14), rgba(255, 255, 255, 0.03));
-  border-color: rgba(212, 161, 95, 0.22);
+  background: linear-gradient(180deg, rgba(255, 95, 162, 0.14), rgba(45, 226, 230, 0.05));
+  border-color: rgba(255, 184, 77, 0.26);
 }
 
 .status-top,
@@ -1115,7 +1119,7 @@
 .action-meta span {
   padding: 8px 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 242, 224, 0.08);
   color: var(--muted);
   font-size: 0.82rem;
@@ -1130,7 +1134,7 @@
   border: 1px solid rgba(255, 242, 224, 0.08);
   font-size: 0.78rem;
   color: var(--text);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .compact-meta {
@@ -1159,7 +1163,7 @@
   padding: 18px;
   border-radius: 24px;
   border: 1px solid rgba(255, 242, 224, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .bar-track {
@@ -1174,7 +1178,7 @@
 .bar-fill {
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--teal), var(--gold));
+  background: linear-gradient(90deg, var(--teal), var(--rose), var(--gold));
 }
 
 .inline-link {
