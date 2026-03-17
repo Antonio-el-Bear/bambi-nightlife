@@ -508,6 +508,50 @@
   background: linear-gradient(135deg, rgba(212, 161, 95, 0.18), rgba(94, 192, 178, 0.08));
 }
 
+.preset-button.is-selected {
+  border-color: rgba(212, 161, 95, 0.3);
+  background: linear-gradient(135deg, rgba(212, 161, 95, 0.2), rgba(94, 192, 178, 0.12));
+}
+
+.platform-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.social-preview-card,
+.social-feed-item {
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 242, 224, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.social-preview-card {
+  display: grid;
+  gap: 12px;
+}
+
+.social-feed-card {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+}
+
+.social-feed-list {
+  display: grid;
+  gap: 14px;
+}
+
+.social-feed-item {
+  display: grid;
+  gap: 12px;
+}
+
+.compact-actions {
+  gap: 8px;
+}
+
 .venue-focus-card {
   display: grid;
   grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);

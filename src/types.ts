@@ -10,6 +10,8 @@ export type UserRole = 'guest' | 'hostess' | 'waitress' | 'management' | 'admin'
 
 export type Tone = 'default' | 'positive' | 'urgent' | 'accent'
 
+export type SocialPlatform = 'instagram' | 'whatsapp' | 'facebook' | 'x'
+
 export type NavItem = {
   id: ScreenId
   label: string
@@ -145,6 +147,19 @@ export type LoginOption = {
   email: string
   name: string
   avatarUrl: string
+}
+
+export type AttendancePost = {
+  id: string
+  authorName: string
+  authorRole: UserRole
+  authorEmail: string
+  authorAvatarUrl: string
+  clubName: string
+  attendingDate: string
+  caption: string
+  platforms: SocialPlatform[]
+  createdAt: string
 }
 
 export type VenueManagementSettings = {

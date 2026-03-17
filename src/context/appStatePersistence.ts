@@ -1,4 +1,5 @@
 import type {
+  AttendancePost,
   AuthUser,
   BookingHistoryEntry,
   BookingRecord,
@@ -8,6 +9,7 @@ import type {
   VenueManagementSettings,
 } from '../types'
 import {
+  seededAttendancePosts,
   seededBookings,
   seededHostessProfiles,
   seededModerationCases,
@@ -21,6 +23,7 @@ const HOSTESS_KEY = 'bambi-platform-hostess'
 const MODERATION_KEY = 'bambi-platform-moderation'
 const NOTIFICATIONS_KEY = 'bambi-platform-notifications'
 const VENUE_MANAGEMENT_KEY = 'bambi-platform-venue-management'
+const ATTENDANCE_POSTS_KEY = 'bambi-platform-attendance-posts'
 const PROFILE_OVERRIDES_KEY = 'bambi-platform-profile-overrides'
 
 export type ProfileOverrideMap = Record<string, Pick<AuthUser, 'name' | 'avatarUrl'>>
@@ -166,6 +169,14 @@ export function loadNotifications() {
 
 export function persistNotifications(notifications: NotificationRecord[]) {
   writeStorage(NOTIFICATIONS_KEY, notifications)
+}
+
+export function loadAttendancePosts() {
+  return readStorage<AttendancePost[]>(ATTENDANCE_POSTS_KEY) ?? seededAttendancePosts
+}
+
+export function persistAttendancePosts(posts: AttendancePost[]) {
+  writeStorage(ATTENDANCE_POSTS_KEY, posts)
 }
 
 export function loadVenueManagementSettings() {

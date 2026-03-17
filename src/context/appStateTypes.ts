@@ -1,5 +1,6 @@
 import { createContext } from 'react'
 import type {
+  AttendancePost,
   AuthUser,
   BookingRecord,
   HostessProfile,
@@ -15,6 +16,7 @@ export type AppStateValue = {
   currentUser: AuthUser | null
   loginOptions: LoginOption[]
   bookings: BookingRecord[]
+  attendancePosts: AttendancePost[]
   hostessProfiles: HostessProfile[]
   moderationCases: ModerationCase[]
   notifications: NotificationRecord[]
@@ -22,6 +24,7 @@ export type AppStateValue = {
   loginAs: (email: string) => void
   logout: () => void
   updateCurrentUserProfile: (updates: Partial<Pick<AuthUser, 'name' | 'avatarUrl'>>) => void
+  createAttendancePost: (input: Pick<AttendancePost, 'clubName' | 'attendingDate' | 'caption' | 'platforms'>) => void
   createBooking: (input: BookingInput) => BookingRecord
   updateBookingStatus: (
     bookingId: string,

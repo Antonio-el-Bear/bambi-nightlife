@@ -5,6 +5,7 @@ import {
   type ReactNode,
 } from 'react'
 import type {
+  AttendancePost,
   AuthUser,
   BookingRecord,
   HostessProfile,
@@ -28,6 +29,7 @@ import {
 } from './appStateEvents'
 import {
   formatEventTime,
+  loadAttendancePosts,
   loadBookings,
   loadHostessProfiles,
   loadModerationCases,
@@ -36,6 +38,7 @@ import {
   loadSession,
   loadVenueManagementSettings,
   makeBookingId,
+  persistAttendancePosts,
   persistBookings,
   persistHostessProfiles,
   persistModerationCases,
@@ -57,6 +60,7 @@ import { AppStateContext, type AppStateValue, type BookingInput } from './appSta
 export function AppStateProvider({ children }: { children: ReactNode }) {
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => loadSession())
   const [bookings, setBookings] = useState<BookingRecord[]>(() => loadBookings())
+  const [attendancePosts, setAttendancePosts] = useState<AttendancePost[]>(() => loadAttendancePosts())
   const [hostessProfiles, setHostessProfiles] = useState<HostessProfile[]>(() => loadHostessProfiles())
   const [moderationCases, setModerationCases] = useState<ModerationCase[]>(() => loadModerationCases())
   const [notifications, setNotifications] = useState<NotificationRecord[]>(() => loadNotifications())
@@ -70,6 +74,10 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     persistBookings(bookings)
   }, [bookings])
+
+  useEffect(() => {
+    persistAttendancePosts(attendancePosts)
+  }, [attendancePosts])
 
   useEffect(() => {
     persistHostessProfiles(hostessProfiles)
@@ -105,6 +113,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       currentUser,
       loginOptions: resolvedLoginOptions,
       bookings,
+      attendancePosts,
       hostessProfiles,
       moderationCases,
       notifications,
@@ -158,6 +167,26 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
 
           return nextOverrides
         })
+      },
+      createAttendancePost: (input) => {
+        if (!currentUser) {
+          return
+        }
+
+        const nextPost: AttendancePost = {
+          id: `SP-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+          authorName: currentUser.name,
+          authorRole: currentUser.role,
+          authorEmail: currentUser.email,
+          authorAvatarUrl: currentUser.avatarUrl,
+          clubName: input.clubName.trim(),
+          attendingDate: input.attendingDate,
+          caption: input.caption.trim(),
+          platforms: input.platforms,
+          createdAt: formatEventTime(),
+        }
+
+        setAttendancePosts((current) => [nextPost, ...current])
       },
       createBooking: (input: BookingInput) => {
         let createdBooking = seededBookings[0]
@@ -363,7 +392,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
         setNotifications((current) => markAllNotificationsRead(current))
       },
     }),
-    [bookings, currentUser, hostessProfiles, moderationCases, notifications, resolvedLoginOptions, venueManagementSettings],
+    [attendancePosts, bookings, currentUser, hostessProfiles, moderationCases, notifications, resolvedLoginOptions, venueManagementSettings],
   )
 
   return <AppStateContext.Provider value={value}>{children}</AppStateContext.Provider>

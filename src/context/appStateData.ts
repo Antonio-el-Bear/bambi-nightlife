@@ -1,4 +1,5 @@
 import type {
+  AttendancePost,
   BookingRecord,
   HostessProfile,
   LoginOption,
@@ -194,6 +195,45 @@ export const seededNotifications: NotificationRecord[] = [
     category: 'moderation',
     actor: 'Security',
     link: '/app/operations',
+  },
+]
+
+export const seededAttendancePosts: AttendancePost[] = [
+  {
+    id: 'SP-01',
+    authorName: 'Lerato Mokoena',
+    authorRole: 'guest',
+    authorEmail: 'guest@bambi.local',
+    authorAvatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Lerato%20Mokoena',
+    clubName: 'Bambi Nightclub',
+    attendingDate: '2026-03-21',
+    caption: 'Booked for Saturday noir at Bambi. VIP ring energy, good people, and no slow starts.',
+    platforms: ['whatsapp', 'instagram'],
+    createdAt: '2026-03-17 18:58',
+  },
+  {
+    id: 'SP-02',
+    authorName: 'Naledi Phiri',
+    authorRole: 'hostess',
+    authorEmail: 'hostess@bambi.local',
+    authorAvatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Naledi%20Phiri',
+    clubName: 'Bambi Nightclub',
+    attendingDate: '2026-03-21',
+    caption: 'Girls are stepping into Bambi early. Group confirmed and reward package ready for the door.',
+    platforms: ['instagram', 'x'],
+    createdAt: '2026-03-17 19:06',
+  },
+  {
+    id: 'SP-03',
+    authorName: 'Kayla Moyo',
+    authorRole: 'waitress',
+    authorEmail: 'waitress@bambi.local',
+    authorAvatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Kayla%20Moyo',
+    clubName: 'Bambi Nightclub',
+    attendingDate: '2026-03-21',
+    caption: 'On the floor at Bambi tonight. Premium tables are locked and service is set for a clean run.',
+    platforms: ['whatsapp', 'facebook'],
+    createdAt: '2026-03-17 19:12',
   },
 ]
 

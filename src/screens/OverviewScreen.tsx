@@ -1,3 +1,4 @@
+import { AttendanceSocialPanel } from '../components/AttendanceSocialPanel'
 import { OverviewAuditPanel } from '../components/OverviewAuditPanel'
 import { ProfileSettingsPanel } from '../components/ProfileSettingsPanel'
 import { VenueFocusPanel } from '../components/VenueFocusPanel'
@@ -13,12 +14,15 @@ export function OverviewScreen() {
   const {
     currentUser,
     visibleBookings,
+    visibleAttendancePosts,
     dynamicStats,
     visibleNotifications,
     operationsHighlights,
     venueManagementSettings,
     updateVenueManagementSettings,
     updateCurrentUserProfile,
+    createAttendancePost,
+    canCreateAttendancePosts,
     canManageVenueSettings,
   } =
     useOverviewModel()
@@ -46,6 +50,16 @@ export function OverviewScreen() {
       {currentUser ? (
         <ProfileSettingsPanel currentUser={currentUser} onUpdate={updateCurrentUserProfile} />
       ) : null}
+
+      <AttendanceSocialPanel
+        canCreatePosts={canCreateAttendancePosts}
+        currentUser={currentUser}
+        defaultClubName="Bambi Nightclub"
+        defaultAttendingDate={venueManagementSettings.featuredEventDate}
+        defaultCaption={`Heading to Bambi for ${venueManagementSettings.featuredEventTitle}. ${venueManagementSettings.featuredEventSummary}`}
+        onCreatePost={createAttendancePost}
+        posts={visibleAttendancePosts}
+      />
 
       <VenueFocusPanel settings={venueManagementSettings} />
 

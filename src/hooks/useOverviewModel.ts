@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { overviewStats } from '../data/platformData'
+import { useAppState } from './useAppState'
 import { useBookingActions } from './useBookingActions'
 import { useAuth } from './useAuth'
 import { useOperationsActions } from './useOperationsActions'
@@ -9,6 +10,7 @@ import { buildOperationsFeed } from '../utils/operationsFeed'
 export function useOverviewModel() {
   const { bookings, currentUser } = useBookingActions()
   const { updateCurrentUserProfile } = useAuth()
+  const { attendancePosts, createAttendancePost } = useAppState()
   const { moderationCases, notifications } = useOperationsActions()
   const { updateVenueManagementSettings, venueManagementSettings } = useVenueManagementActions()
 
@@ -71,15 +73,24 @@ export function useOverviewModel() {
     [bookings, moderationCases, notifications],
   )
 
+  const visibleAttendancePosts = useMemo(
+    () => attendancePosts.slice(0, 6),
+    [attendancePosts],
+  )
+
   return {
     currentUser,
     visibleBookings,
+    visibleAttendancePosts,
     dynamicStats,
     visibleNotifications,
     operationsHighlights,
     venueManagementSettings,
     updateVenueManagementSettings,
     updateCurrentUserProfile,
+    createAttendancePost,
+    canCreateAttendancePosts:
+      currentUser?.role === 'guest' || currentUser?.role === 'hostess' || currentUser?.role === 'waitress',
     canManageVenueSettings:
       currentUser?.role === 'management' || currentUser?.role === 'admin',
   }
