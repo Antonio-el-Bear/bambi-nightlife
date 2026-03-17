@@ -558,6 +558,73 @@
   padding: 20px 24px 24px;
 }
 
+.tonight-strip {
+  padding: 20px 24px 24px;
+}
+
+.tonight-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.tonight-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 136px;
+  padding: 18px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tonight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tonight-card[data-module='bookings']::before {
+  background: linear-gradient(135deg, rgba(255, 184, 77, 0.16), transparent 42%);
+}
+
+.tonight-card[data-module='buzz']::before {
+  background: linear-gradient(135deg, rgba(255, 95, 162, 0.16), transparent 42%);
+}
+
+.tonight-card[data-module='service']::before {
+  background: linear-gradient(135deg, rgba(45, 226, 230, 0.16), transparent 42%);
+}
+
+.tonight-card[data-module='ops']::before {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.16), transparent 42%);
+}
+
+.tonight-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.tonight-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.84rem;
+  margin-bottom: 8px;
+}
+
+.tonight-card strong {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  margin-bottom: 8px;
+  line-height: 0.96;
+}
+
+.tonight-card p {
+  color: var(--muted);
+}
+
 .quick-access-head {
   margin-bottom: 14px;
 }
@@ -1547,6 +1614,7 @@
 }
 
 @media (max-width: 960px) {
+  .tonight-grid,
   .screen-banner,
   .dashboard-hero,
   .split-layout,
@@ -1648,6 +1716,7 @@
 }
 
 @media (max-width: 640px) {
+  .tonight-grid,
   .split-layout,
   .split-layout.wide-right,
   .detail-layout,

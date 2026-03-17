@@ -2,6 +2,7 @@ import { AttendanceSocialPanel } from '../components/AttendanceSocialPanel'
 import { OverviewAuditPanel } from '../components/OverviewAuditPanel'
 import { PosterArtwork } from '../components/PosterArtwork'
 import { ProfileSettingsPanel } from '../components/ProfileSettingsPanel'
+import { TonightStrip } from '../components/TonightStrip'
 import { VenueFocusPanel } from '../components/VenueFocusPanel'
 import { VenueManagementPanel } from '../components/VenueManagementPanel'
 import { OverviewNotificationsPanel } from '../components/OverviewNotificationsPanel'
@@ -16,6 +17,7 @@ export function OverviewScreen() {
     currentUser,
     visibleBookings,
     visibleAttendancePosts,
+    tonightSignals,
     dynamicStats,
     visibleNotifications,
     operationsHighlights,
@@ -80,6 +82,8 @@ export function OverviewScreen() {
           ))}
         </div>
       </section>
+
+      <TonightStrip signals={tonightSignals} />
 
       {currentUser ? (
         <ProfileSettingsPanel currentUser={currentUser} onUpdate={updateCurrentUserProfile} />

@@ -78,10 +78,44 @@ export function useOverviewModel() {
     [attendancePosts],
   )
 
+  const tonightSignals = useMemo(() => {
+    const pendingCount = bookings.filter((booking) => booking.status === 'pending').length
+    const noShowCount = bookings.filter((booking) => booking.attendanceStatus === 'no-show').length
+    const unreadCount = visibleNotifications.filter((notification) => notification.unread).length
+
+    return [
+      {
+        id: 'bookings' as const,
+        label: currentUser?.role === 'guest' ? 'My tables' : 'Active bookings',
+        value: String(visibleBookings.length),
+        detail: currentUser?.role === 'guest' ? 'Reservations locked under your profile.' : 'Visible live reservations right now.',
+      },
+      {
+        id: 'buzz' as const,
+        label: 'Social buzz',
+        value: String(visibleAttendancePosts.length),
+        detail: 'Attendance posts feeding the night’s social momentum.',
+      },
+      {
+        id: 'service' as const,
+        label: 'Service pressure',
+        value: String(pendingCount),
+        detail: pendingCount > 0 ? 'Requests still waiting on response or assignment.' : 'No queue pressure showing right now.',
+      },
+      {
+        id: 'ops' as const,
+        label: 'Ops watch',
+        value: String(Math.max(noShowCount, unreadCount)),
+        detail: noShowCount > 0 ? 'No-show or recovery risk needs attention.' : `${unreadCount} unread alerts still open.`,
+      },
+    ]
+  }, [bookings, currentUser?.role, visibleAttendancePosts.length, visibleBookings.length, visibleNotifications])
+
   return {
     currentUser,
     visibleBookings,
     visibleAttendancePosts,
+    tonightSignals,
     dynamicStats,
     visibleNotifications,
     operationsHighlights,
