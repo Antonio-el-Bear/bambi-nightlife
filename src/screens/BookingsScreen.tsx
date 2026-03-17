@@ -3,6 +3,7 @@ import { BookingCheckoutPanel } from '../components/BookingCheckoutPanel'
 import { BookingExperiencePanel } from '../components/BookingExperiencePanel'
 import { BookingsTriagePanel } from '../components/BookingsTriagePanel'
 import { RecentBookingsPanel } from '../components/RecentBookingsPanel'
+import { ScreenBanner } from '../components/ScreenBanner'
 import { bookingTables } from '../data/platformData'
 import { useBookingActions } from '../hooks/useBookingActions'
 import { useBookingCheckoutFlow } from '../hooks/useBookingCheckoutFlow'
@@ -73,6 +74,16 @@ export function BookingsScreen() {
 
   return (
     <div className="screen-stack">
+      <ScreenBanner
+        chips={['VIP tables', 'Pre-orders', 'Fast checkout']}
+        detail="Move from table choice to secured booking without losing the event energy."
+        eyebrow="Bookings"
+        imageAlt="Nightclub table service"
+        imageUrl="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1200&q=80"
+        module="bookings"
+        title="Book the night in a more visual way"
+      />
+
       <BookingCheckoutPanel
         checkoutSteps={checkoutSteps}
         selectedTable={selectedTable}

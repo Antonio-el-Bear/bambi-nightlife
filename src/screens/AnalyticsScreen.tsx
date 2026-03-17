@@ -1,5 +1,6 @@
 import { AnalyticsAuditPanel } from '../components/AnalyticsAuditPanel'
 import { AnalyticsPerformancePanel } from '../components/AnalyticsPerformancePanel'
+import { ScreenBanner } from '../components/ScreenBanner'
 import { SectionHeader } from '../components/SectionHeader'
 import { StatCard } from '../components/StatCard'
 import { analyticsNotes } from '../data/platformData'
@@ -10,6 +11,16 @@ export function AnalyticsScreen() {
 
   return (
     <div className="screen-stack">
+      <ScreenBanner
+        chips={['Revenue', 'Conversion', 'Nightly signals']}
+        detail="Make performance feel like a live event dashboard, not a report dump."
+        eyebrow="Analytics"
+        imageAlt="Nightclub lights and metrics"
+        imageUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80"
+        module="analytics"
+        title="Read the night through sharper visual signals"
+      />
+
       <section className="card">
         <SectionHeader
           eyebrow="Management reporting"

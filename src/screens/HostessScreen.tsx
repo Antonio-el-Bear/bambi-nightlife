@@ -1,4 +1,5 @@
 import { Avatar } from '../components/Avatar'
+import { ScreenBanner } from '../components/ScreenBanner'
 import { SectionHeader } from '../components/SectionHeader'
 import { hostessChecks, rewardTiers } from '../data/platformData'
 import { useHostessActions } from '../hooks/useHostessActions'
@@ -8,6 +9,16 @@ export function HostessScreen() {
 
   return (
     <div className="screen-stack">
+      <ScreenBanner
+        chips={['Profile tiers', 'Group rewards', 'Bottle requests']}
+        detail="Make guest growth feel more like curation and less like admin."
+        eyebrow="Female guest"
+        imageAlt="Stylish group arriving at an event"
+        imageUrl="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80"
+        module="hostess"
+        title="Build the room with image-led guest momentum"
+      />
+
       <section className="card split-layout">
         <div>
           <SectionHeader
