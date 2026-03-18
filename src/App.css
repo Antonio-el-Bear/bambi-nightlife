@@ -576,6 +576,41 @@
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.04);
+  will-change: transform, box-shadow;
+}
+
+.tonight-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+  height: 32px;
+}
+.tonight-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+.animated-pulse {
+  animation: pulseSweep 2.2s cubic-bezier(0.4,0,0.2,1) infinite;
+}
+
+@keyframes pulseSweep {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255,184,77,0.10), 0 0 0 0 rgba(255,95,162,0.10);
+    transform: scale(1);
+  }
+  60% {
+    box-shadow: 0 0 0 8px rgba(255,184,77,0.08), 0 0 0 16px rgba(255,95,162,0.06);
+    transform: scale(1.025);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255,184,77,0.10), 0 0 0 0 rgba(255,95,162,0.10);
+    transform: scale(1);
+  }
 }
 
 .tonight-card::before {
@@ -635,6 +670,7 @@
   gap: 14px;
 }
 
+
 .shortcut-card {
   min-height: 132px;
   padding: 18px;
@@ -652,6 +688,26 @@
     radial-gradient(circle at bottom left, rgba(45, 226, 230, 0.14), transparent 34%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
   transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+  will-change: transform, box-shadow;
+}
+
+.shortcut-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+  height: 32px;
+}
+.shortcut-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+.animated-pulse {
+  animation: pulseSweep 2.2s cubic-bezier(0.4,0,0.2,1) infinite;
 }
 
 .shortcut-card:hover {

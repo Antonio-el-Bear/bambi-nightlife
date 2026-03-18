@@ -1,3 +1,31 @@
+// Default icon fallback for each module
+type DefaultShortcutIconProps = { id: string }
+const DefaultShortcutIcon: React.FC<DefaultShortcutIconProps> = ({ id }) => {
+  switch (id) {
+    case 'bookings':
+      return (
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="8" width="20" height="14" rx="4" fill="#FFB84D"/><rect x="8" y="4" width="12" height="6" rx="2" fill="#FF5FA2"/></svg>
+      );
+    case 'hostess':
+      return (
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><ellipse cx="14" cy="16" rx="8" ry="6" fill="#FF5FA2"/><ellipse cx="14" cy="10" rx="4" ry="4" fill="#FFB84D"/></svg>
+      );
+    case 'service':
+      return (
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="6" y="10" width="16" height="8" rx="4" fill="#2DE2E6"/><rect x="10" y="6" width="8" height="4" rx="2" fill="#8B5CF6"/></svg>
+      );
+    case 'operations':
+      return (
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="8" y="8" width="12" height="12" rx="6" fill="#8B5CF6"/><rect x="12" y="4" width="4" height="8" rx="2" fill="#FF5FA2"/></svg>
+      );
+    case 'analytics':
+      return (
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="6" y="16" width="4" height="6" rx="2" fill="#2DE2E6"/><rect x="12" y="10" width="4" height="12" rx="2" fill="#FFB84D"/><rect x="18" y="6" width="4" height="16" rx="2" fill="#FF5FA2"/></svg>
+      );
+    default:
+      return null;
+  }
+};
 import { AttendanceSocialPanel } from '../components/AttendanceSocialPanel'
 import { OverviewAuditPanel } from '../components/OverviewAuditPanel'
 import { PosterArtwork } from '../components/PosterArtwork'
@@ -74,13 +102,19 @@ export function OverviewScreen() {
         </div>
         <div className="shortcut-grid">
           {quickAccessItems.map((item) => (
-            <Link className="shortcut-card" data-module={item.id} key={item.id} to={screenToRoute[item.id]}>
+            <Link className="shortcut-card animated-pulse" data-module={item.id} key={item.id} to={screenToRoute[item.id]}>
+              <span className="shortcut-icon">
+                <DefaultShortcutIcon id={item.id} />
+              </span>
               <span className="shortcut-badge">{quickAccessBadges[item.id]}</span>
               <strong>{item.label}</strong>
               <span>{item.shortLabel}</span>
             </Link>
           ))}
         </div>
+
+
+
       </section>
 
       <TonightStrip signals={tonightSignals} />
