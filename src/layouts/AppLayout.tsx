@@ -23,21 +23,21 @@ export function AppLayout() {
     if (!currentUser) {
       return
     }
-
     if (!canAccessScreen(currentUser.role, activeScreen)) {
       navigate(getDefaultRouteForRole(currentUser.role), { replace: true })
     }
   }, [activeScreen, currentUser, navigate])
 
   return (
-    <div className="app-shell">
-      <Sidebar
-        items={accessibleItems}
-        activeScreen={activeScreen}
-        onSelect={(screen) => navigate(screenToRoute[screen])}
-      />
-
-      <div className="app-main">
+    <div className="twitter-shell">
+      <aside className="twitter-sidebar">
+        <Sidebar
+          items={accessibleItems}
+          activeScreen={activeScreen}
+          onSelect={(screen) => navigate(screenToRoute[screen])}
+        />
+      </aside>
+      <div className="twitter-main">
         <Topbar
           activeItem={activeItem}
           items={accessibleItems}
@@ -49,9 +49,7 @@ export function AppLayout() {
           notifications={visibleNotifications}
           onMarkNotificationRead={(notificationId) => {
             markNotificationRead(notificationId)
-
             const selected = visibleNotifications.find((notification) => notification.id === notificationId)
-
             if (selected?.link) {
               navigate(selected.link)
             }
@@ -62,11 +60,13 @@ export function AppLayout() {
             navigate('/login')
           }}
         />
-
-        <main className="content-area">
+        <main className="twitter-content">
           <Outlet />
         </main>
       </div>
+      <aside className="twitter-rightbar">
+        {/* Optional: Add trending, suggestions, or extra info here */}
+      </aside>
     </div>
   )
 }
