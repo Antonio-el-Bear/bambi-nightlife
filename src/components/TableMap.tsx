@@ -26,6 +26,7 @@ export function TableMap({ tables, selectedTableId, onSelect }: TableMapProps) {
               <small>{table.capacity}</small>
               <small>{table.fee}</small>
             </div>
+            <div className="fake-club-label">Demo Club</div>
           </button>
         )
       })}
